@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panier - Meenia Site</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="logoo.png" alt="Meenia Logo">
+        </div>
+         <nav>
+            <ul>
+                <li><a href="accueil.html"><i class="fas fa-home"></i> Accueil</a></li>
+                <li><a href="nouveaux.html"><i class="fas fa-star"></i> Nouveaux</a></li>
+                <li><a href="bijoux.html"><i class="fas fa-gem"></i> Bijoux</a></li>
+                <li><a href="caftan.html"><i class="fas fa-tshirt"></i> Caftan</a></li>
+                <li><a href="brocard.html"><i class="fas fa-crown"></i> Brocard</a></li>
+                <li><a href="contact.html"><i class="fas fa-envelope"></i> Contact</a></li>
+                <li><a href="panier.html"><i class="fas fa-shopping-cart"></i> Panier (<span id="cart-count">0</span>)</a></li>
+                <li><button id="login-btn"><i class="fas fa-user"></i> Connexion</button></li>
+                <li><button id="logout-btn" style="display:none;"><i class="fas fa-sign-out-alt"></i> Déconnexion</button></li>
+                <li id="user-status">Non connecté</li>
+            </ul>
+        </nav>
+        <div class="user-actions">
+            <span id="user-status">Non connecté</span>
+            <button id="login-btn">Se connecter</button>
+            <button id="logout-btn" style="display:none;">Se déconnecter</button>
+        </div>
+    </header>
+
+    <section id="panier">
+        <h2>Panier</h2>
+        <div id="cart-items"></div>
+        <p>Total: <span id="total">0€</span></p>
+        <button id="checkout">Commander</button>
+    </section>
+
+
+
+    <footer>
+        <p>&copy; 2023 Meenia Site. Tous droits réservés.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
+
+

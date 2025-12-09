@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Caftan - Meenia Site</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="logoo.png" alt="Meenia Logo">
+        </div>
+         <nav>
+            <ul>
+                <li><a href="accueil.html"><i class="fas fa-home"></i> Accueil</a></li>
+                <li><a href="nouveaux.html"><i class="fas fa-star"></i> Nouveaux</a></li>
+                <li><a href="bijoux.html"><i class="fas fa-gem"></i> Bijoux</a></li>
+                <li><a href="caftan.html"><i class="fas fa-tshirt"></i> Caftan</a></li>
+                <li><a href="brocard.html"><i class="fas fa-crown"></i> Brocard</a></li>
+                <li><a href="contact.html"><i class="fas fa-envelope"></i> Contact</a></li>
+                <li><a href="panier.html"><i class="fas fa-shopping-cart"></i> Panier (<span id="cart-count">0</span>)</a></li>
+                <li><button id="login-btn"><i class="fas fa-user"></i> Connexion</button></li>
+                <li><button id="logout-btn" style="display:none;"><i class="fas fa-sign-out-alt"></i> Déconnexion</button></li>
+                <li id="user-status">Non connecté</li>
+            </ul>
+        </nav>
+        <div class="user-actions">
+            <span id="user-status">Non connecté</span>
+            <button id="login-btn">Se connecter</button>
+            <button id="logout-btn" style="display:none;">Se déconnecter</button>
+        </div>
+    </header>
+
+    <section id="caftan">
+        <h2>Caftan</h2>
+        <div class="products">
+            <div class="product">
+                <img src="Design sans titre(1).png" alt="Design sans titre">
+                <h3>Caftan Ambre</h3>
+                <p>Prix: 100€</p>
+                <button class="add-to-cart" data-product="Caftan Marocain 1" data-price="100">Ajouter au panier</button>
+            </div>
+            <div class="product">
+                <img src="Design sans titre(1).png" alt="Design sans titre(1)">
+                <h3>Caftan Marocain 2</h3>
+                <p>Prix: 110€</p>
+                <button class="add-to-cart" data-product="Caftan Marocain 2" data-price="110">Ajouter au panier</button>
+            </div>
+            <div class="product">
+                <img src="Design sans titre(2).png" alt="Design sans titre(2)">
+                <h3>Caftan Marocain 3</h3>
+                <p>Prix: 120€</p>
+                <button class="add-to-cart" data-product="Caftan Marocain 3" data-price="120">Ajouter au panier</button>
+            </div>
+            <div class="product">
+                <img src="Design sans titre(3).png" alt="Design sans titre(3)">
+                <h3>Caftan Marocain 4</h3>
+                <p>Prix: 130€</p>
+                <button class="add-to-cart" data-product="Caftan Marocain 4" data-price="130">Ajouter au panier</button>
+            </div>
+            <div class="product">
+                <img src="Design sans titre(4).png" alt="Design sans titre(4)">
+                <h3>Caftan Marocain 5</h3>
+                <p>Prix: 140€</p>
+                <button class="add-to-cart" data-product="Caftan Marocain 5" data-price="140">Ajouter au panier</button>
+            </div>
+            <div class="product">
+                <img src="Design sans titre(5).png" alt="Design sans titre(5)">
+                <h3>Caftan Marocain 6</h3>
+                <p>Prix: 150€</p>
+                <button class="add-to-cart" data-product="Caftan Marocain 6" data-price="150">Ajouter au panier</button>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="newsletter">
+                <h3>Inscrivez-vous à notre newsletter</h3>
+                <input type="email" placeholder="Votre email" id="newsletter-email">
+                <button id="newsletter-btn">S'inscrire</button>
+            </div>
+            <div class="social-links">
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-pinterest"></i></a>
+            </div>
+        </div>
+        <p>&copy; 2023 Meenia Site. Tous droits réservés.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

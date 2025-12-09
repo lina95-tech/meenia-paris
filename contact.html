@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact - Meenia Site</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="logoo.png" alt="Meenia Logo">
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Accueil</a></li>
+                <li><a href="shop.html?category=caftan">Caftan</a></li>
+                <li><a href="shop.html?category=brocard">Brocard</a></li>
+                <li><a href="shop.html?category=bijoux">Bijoux</a></li>
+                <li><a href="shop.html?category=nouveau">Nouveau</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="cart.html">Panier (<span id="cart-count">0</span>)</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section id="contact">
+        <div class="container">
+            <div class="contact-wrapper">
+                <div class="contact-info">
+                    <h2>Contactez-Nous</h2>
+                    <p>Nous sommes là pour vous aider ! Que vous ayez des questions sur nos produits, besoin d'assistance pour une commande ou simplement envie de partager vos commentaires, n'hésitez pas à nous contacter. Notre équipe vous répondra dans les plus brefs délais.</p>
+                    <div class="contact-details">
+                        <div class="detail">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>123 Rue de la Mode, Casablanca, Maroc</span>
+                        </div>
+                        <div class="detail">
+                            <i class="fas fa-phone"></i>
+                            <span>6 12 34 56 78</span>
+                        </div>
+                        <div class="detail">
+                            <i class="fas fa-envelope"></i>
+                            <span>contact@meenia.fr</span>
+                        </div>
+                        <div class="detail">
+                            <i class="fas fa-clock"></i>
+                            <span>Lun - Ven: 9h - 18h | Sam: 10h - 16h</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="contact-form">
+                    <form id="contact-form">
+                        <div class="form-group">
+                            <label for="name">Nom complet</label>
+                            <input type="text" id="name" name="name" placeholder="Votre nom complet" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Adresse email</label>
+                            <input type="email" id="email" name="email" placeholder="votre.email@example.com" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="subject">Sujet</label>
+                            <input type="text" id="subject" name="subject" placeholder="Objet de votre message" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Message</label>
+                            <textarea id="message" name="message" placeholder="Votre message..." required></textarea>
+                        </div>
+                        <button type="submit" class="submit-btn">Envoyer le message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="newsletter">
+                <h3>Inscrivez-vous à notre newsletter</h3>
+                <input type="email" placeholder="Votre email" id="newsletter-email">
+                <button id="newsletter-btn">S'inscrire</button>
+            </div>
+            <div class="social-links">
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-pinterest"></i></a>
+                <a href="#"><i class="fab fa-tiktok"></i></a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2023 Meenia Site. Tous droits réservés.</p>
+            <ul>
+                <li><a href="#">Mentions légales</a></li>
+                <li><a href="#">Politique de confidentialité</a></li>
+                <li><a href="#">Conditions générales</a></li>
+            </ul>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            document.getElementById('contact-form').addEventListener('submit', (e) => {
+                e.preventDefault();
+                alert('Merci pour votre message ! Nous vous répondrons bientôt.');
+                document.getElementById('contact-form').reset();
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Paiement - Meenia Site</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="logoo.png" alt="Meenia Logo">
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Accueil</a></li>
+                <li><a href="shop.html?category=caftan">Caftan</a></li>
+                <li><a href="shop.html?category=brocard">Brocard</a></li>
+                <li><a href="shop.html?category=bijoux">Bijoux</a></li>
+                <li><a href="shop.html?category=nouveau">Nouveau</a></li>
+                <li><a href="index.html#contact">Contact</a></li>
+                <li><a href="cart.html">Panier (<span id="cart-count">0</span>)</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section id="checkout">
+        <div class="container">
+            <h1>Paiement</h1>
+            <div class="checkout-content">
+                <div class="checkout-form">
+                    <h2>Informations Client</h2>
+                    <form id="checkout-form">
+                        <div class="form-group">
+                            <label for="first-name">Prénom:</label>
+                            <input type="text" id="first-name" name="first-name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="last-name">Nom:</label>
+                            <input type="text" id="last-name" name="last-name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email:</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Téléphone:</label>
+                            <input type="tel" id="phone" name="phone" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="address">Adresse:</label>
+                            <textarea id="address" name="address" required></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="city">Ville:</label>
+                            <input type="text" id="city" name="city" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="postal-code">Code Postal:</label>
+                            <input type="text" id="postal-code" name="postal-code" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="country">Pays:</label>
+                            <select id="country" name="country" required>
+                                <option value="Maroc">Maroc</option>
+                                <option value="France">France</option>
+                                <option value="Belgique">Belgique</option>
+                                <option value="Canada">Canada</option>
+                            </select>
+                        </div>
+                    </form>
+
+                    <h2>Paiement</h2>
+                    <div class="payment-options">
+                        <div class="payment-option">
+                            <input type="radio" id="credit-card" name="payment" value="credit-card" checked>
+                            <label for="credit-card">Carte de Crédit</label>
+                        </div>
+                        <div class="payment-option">
+                            <input type="radio" id="paypal" name="payment" value="paypal">
+                            <label for="paypal">PayPal</label>
+                        </div>
+                        <div class="payment-option">
+                            <input type="radio" id="bank-transfer" name="payment" value="bank-transfer">
+                            <label for="bank-transfer">Virement Bancaire</label>
+                        </div>
+                    </div>
+                    <p class="payment-note">Note: Ceci est un paiement fictif pour démonstration.</p>
+                </div>
+
+                <div class="order-summary">
+                    <h2>Récapitulatif de Commande</h2>
+                    <div id="order-items">
+                        <!-- Order items will be populated by JavaScript -->
+                    </div>
+                    <div class="order-total">
+                        <p>Sous-total: <span id="subtotal">0€</span></p>
+                        <p>Livraison: <span id="shipping">5€</span></p>
+                        <p><strong>Total: <span id="total">0€</span></strong></p>
+                    </div>
+                    <button type="submit" form="checkout-form" class="place-order-btn">Passer la Commande</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="newsletter">
+                <h3>Inscrivez-vous à notre newsletter</h3>
+                <input type="email" placeholder="Votre email" id="newsletter-email">
+                <button id="newsletter-btn">S'inscrire</button>
+            </div>
+            <div class="social-links">
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-pinterest"></i></a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2023 Meenia Site. Tous droits réservés.</p>
+            <ul>
+                <li><a href="#">Mentions légales</a></li>
+                <li><a href="#">Politique de confidentialité</a></li>
+                <li><a href="#">Conditions générales</a></li>
+            </ul>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            updateOrderSummary();
+
+            document.getElementById('checkout-form').addEventListener('submit', (e) => {
+                e.preventDefault();
+                alert('Commande passée avec succès! (Paiement fictif)');
+                localStorage.removeItem('cart');
+                window.location.href = 'index.html';
+            });
+        });
+
+        function updateOrderSummary() {
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            const orderItems = document.getElementById('order-items');
+            const subtotal = document.getElementById('subtotal');
+            const total = document.getElementById('total');
+
+            orderItems.innerHTML = '';
+            let totalPrice = 0;
+
+            cart.forEach(item => {
+                const itemDiv = document.createElement('div');
+                itemDiv.className = 'order-item';
+                itemDiv.innerHTML = `
+                    <p>${item.product} x ${item.quantity} - ${item.price}€</p>
+                `;
+                orderItems.appendChild(itemDiv);
+                totalPrice += parseFloat(item.price) * item.quantity;
+            });
+
+            subtotal.textContent = totalPrice.toFixed(2) + '€';
+            total.textContent = (totalPrice + 5).toFixed(2) + '€'; // Adding shipping cost
+        }
+    </script>
+</body>
+</html>

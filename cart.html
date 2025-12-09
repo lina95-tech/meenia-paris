@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panier - Meenia Site</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="logoo.png" alt="Meenia Logo">
+        </div>
+        <nav>
+            <div class="search-bar">
+                <input type="text" id="search-input" placeholder="Rechercher des produits...">
+                <button id="search-btn"><i class="fas fa-search"></i></button>
+            </div>
+            <ul>
+                <li><a href="index.html">Accueil</a></li>
+                <li><a href="shop.html?category=caftan">Caftan</a></li>
+                <li><a href="shop.html?category=brocard">Brocard</a></li>
+                <li><a href="shop.html?category=bijoux">Bijoux</a></li>
+                <li><a href="shop.html?category=nouveau">Nouveau</a></li>
+                <li><a href="wishlist.html">Liste de souhaits</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <li><a href="cart.html">Panier (<span id="cart-count">0</span>)</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section id="cart">
+        <div class="container">
+            <h1>Votre Panier</h1>
+            <div id="cart-items">
+                <!-- Cart items will be populated by JavaScript -->
+            </div>
+            <div id="bulk-actions" style="display: none; margin-bottom: 20px;">
+                <h3>Actions groupées pour les Caftans</h3>
+                <label><input type="checkbox" id="select-all-caftans"> Sélectionner tous les caftans</label>
+                <button id="remove-selected" style="margin-left: 10px; background: #801032; color: white; border: none; padding: 5px 10px; cursor: pointer;">Supprimer sélectionnés</button>
+            </div>
+            <div class="cart-total">
+                <p>Total: <span id="total">0€</span></p>
+                <a href="checkout.html" id="checkout-btn" class="checkout-btn">Procéder au paiement</a>
+            </div>
+            <div id="empty-cart-message" style="display: none;">
+                <p>Votre panier est vide.</p>
+                <a href="shop.html">Continuer vos achats</a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="newsletter">
+                <h3>Inscrivez-vous à notre newsletter</h3>
+                <input type="email" placeholder="Votre email" id="newsletter-email">
+                <button id="newsletter-btn">S'inscrire</button>
+            </div>
+            <div class="social-links">
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-pinterest"></i></a>
+                <a href="#"><i class="fab fa-tiktok"></i></a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2023 Meenia Site. Tous droits réservés.</p>
+            <ul>
+                <li><a href="#">Mentions légales</a></li>
+                <li><a href="#">Politique de confidentialité</a></li>
+                <li><a href="#">Conditions générales</a></li>
+            </ul>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+    <script>
+        // Cart functionality for caftan checkboxes
+        document.addEventListener('DOMContentLoaded', () => {
+            const selectAllCheckbox = document.getElementById('select-all-caftans');
+            const removeSelectedBtn = document.getElementById('remove-selected');
+            const bulkActions = document.getElementById('bulk-actions');
+
+            function updateBulkActionsVisibility() {
+                const cartItems = document.querySelectorAll('#cart-items .cart-item');
+                const hasCaftans = Array.from(cartItems).some(item => item.textContent.toLowerCase().includes('caftan'));
+                bulkActions.style.display = hasCaftans ? 'block' : 'none';
+            }
+
+            // Add checkboxes to caftan items
+            function addCheckboxesToCaftans() {
+                const cartItems = document.querySelectorAll('#cart-items .cart-item');
+                cartItems.forEach(item => {
+                    if (item.textContent.toLowerCase().includes('caftan')) {
+                        const checkbox = document.createElement('input');
+                        checkbox.type = 'checkbox';
+                        checkbox.className = 'caftan-checkbox';
+                        item.insertBefore(checkbox, item.firstChild);
+                    }
+                });
+            }
+
+            // Handle select all checkbox
+            selectAllCheckbox.addEventListener('change', () => {
+                const caftanCheckboxes = document.querySelectorAll('.caftan-checkbox');
+                caftanCheckboxes.forEach(cb => cb.checked = selectAllCheckbox.checked);
+            });
+
+            // Handle remove selected button
+            removeSelectedBtn.addEventListener('click', () => {
+                const selectedCheckboxes = document.querySelectorAll('.caftan-checkbox:checked');
+                selectedCheckboxes.forEach(cb => {
+                    const cartItem = cb.closest('.cart-item');
+                    cartItem.remove();
+                });
+                updateBulkActionsVisibility();
+                // Update cart count and total (assuming functions from script.js)
+                updateCartCount();
+                updateTotal();
+            });
+
+            // Initial setup
+            addCheckboxesToCaftans();
+            updateBulkActionsVisibility();
+        });
+    </script>
+</body>
+</html>

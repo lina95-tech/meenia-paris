@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catalogue - Meenia Site</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="logoo.png" alt="Meenia Logo">
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Accueil</a></li>
+                <li><a href="shop.html?category=caftan">Caftan</a></li>
+                <li><a href="shop.html?category=brocard">Brocard</a></li>
+                <li><a href="shop.html?category=bijoux">Bijoux</a></li>
+                <li><a href="shop.html?category=nouveau">Nouveau</a></li>
+                <li><a href="index.html#contact">Contact</a></li>
+                <li><a href="cart.html">Panier (<span id="cart-count">0</span>)</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section id="shop">
+        <div class="container">
+            <div id="filters" style="display: none;">
+                <h3>Filtrer par type de Caftan</h3>
+                <label><input type="checkbox" value="traditionnel" class="caftan-filter"> Traditionnel</label>
+                <label><input type="checkbox" value="moderne" class="caftan-filter"> Moderne</label>
+                <label><input type="checkbox" value="festif" class="caftan-filter"> Festif</label>
+                <label><input type="checkbox" value="soirée" class="caftan-filter"> Soirée</label>
+                
+            </div>
+
+            <div class="products" id="product-list">
+                <!-- Products will be populated by JavaScript -->
+            </div>
+
+            <div id="filters-bottom" style="display: none; margin-top: 20px;">
+                
+             
+            </div>
+
+            <div id="filters-bottom-2" style="display: none; margin-top: 20px;">
+                
+            </div>
+
+            <div id="filters-bottom-3" style="display: none; margin-top: 20px;">
+             
+                            </div>
+
+            <div id="individual-caftans" style="display: none; margin-top: 20px;">
+               
+               
+           </div>
+
+            <div id="brocard-filters" style="display: none; margin-top: 20px;">
+                <h3>Filtrer par type de Brocard</h3>
+                <label><input type="checkbox" value="moderne" class="brocard-filter"> Moderne</label>
+                <label><input type="checkbox" value="classique" class="brocard-filter"> Classique</label>
+                <label><input type="checkbox" value="luxe" class="brocard-filter"> Luxe</label>
+                <button id="add-selected-brocards" style="margin-top: 10px; background: #8d7f37; color: white; border: none; padding: 10px 20px; cursor: pointer;">Ajouter les brocards sélectionnés au panier</button>
+            </div>
+
+            <div id="individual-brocards" style="display: none; margin-top: 20px;">
+                <h3>Sélectionner des Brocards Individuels</h3>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px;">
+                    <label><input type="checkbox" value="2" class="individual-brocard"> Brocard Moderne - 100€</label>
+                    <label><input type="checkbox" value="7" class="individual-brocard"> Brocard Classique - 100€</label>
+                    <label><input type="checkbox" value="10" class="individual-brocard"> Brocard Luxe - 140€</label>
+                </div>
+                <button id="add-selected-individual-brocards" style="margin-top: 20px; background: #8d7f37; color: white; border: none; padding: 10px 20px; cursor: pointer;">Ajouter les brocards sélectionnés au panier</button>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="newsletter">
+                <h3>Inscrivez-vous à notre newsletter</h3>
+                <input type="email" placeholder="Votre email" id="newsletter-email">
+                <button id="newsletter-btn">S'inscrire</button>
+            </div>
+            <div class="social-links">
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-pinterest"></i></a>
+                <a href="#"><i class="fab fa-tiktok"></i></a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2023 Meenia Site. Tous droits réservés.</p>
+            <ul>
+                <li><a href="#">Mentions légales</a></li>
+                <li><a href="#">Politique de confidentialité</a></li>
+                <li><a href="#">Conditions générales</a></li>
+            </ul>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+    <script>
+        // Product data
+        const products = [
+            { id: 1, name: 'Caftan Élégant Nouveau', price: 100, category: 'nouveau', image: 'Design sans titre(7).png', description: 'Un caftan moderne avec des touches traditionnelles.' },
+            { id: 2, name: 'Brocard Moderne', price: 100, category: 'brocard', image: 'https://via.placeholder.com/300x300?text=Brocard+Moderne', description: 'Tissu brocard de qualité supérieure.' },
+            { id: 3, name: 'Bijoux Traditionnel', price: 80, category: 'bijoux', image: 'https://via.placeholder.com/300x300?text=Bijoux+Traditionnel', description: 'Bijoux artisanaux marocains.' },
+            { id: 4, name: 'Caftan Traditionnel 1', price: 180, category: 'caftan', image: 'https://via.placeholder.com/300x300?text=Caftan+Traditionnel+1', description: 'Caftan authentique marocain.' },
+            { id: 5, name: 'Caftan Moderne 1', price: 160, category: 'caftan', image: 'https://via.placeholder.com/300x300?text=Caftan+Moderne+1', description: 'Caftan fusion moderne.' },
+            { id: 6, name: 'Caftan Festif 1', price: 100, category: 'caftan', image: 'https://via.placeholder.com/300x300?text=Caftan+Festif+1', description: 'Caftan parfait pour les occasions spéciales.' },
+            { id: 7, name: 'Brocard Classique', price: 100, category: 'brocard', image: 'https://via.placeholder.com/300x300?text=Brocard+Classique', description: 'Brocard traditionnel.' },
+            { id: 8, name: 'Bijoux Moderne', price: 90, category: 'bijoux', image: 'https://via.placeholder.com/300x300?text=Bijoux+Moderne', description: 'Bijoux contemporains.' },
+            { id: 9, name: 'Caftan Soirée 1', price: 220, category: 'caftan', image: 'https://via.placeholder.com/300x300?text=Caftan+Soirée+1', description: 'Caftan élégant pour soirées.' },
+            { id: 10, name: 'Brocard Luxe', price: 140, category: 'brocard', image: 'https://via.placeholder.com/300x300?text=Brocard+Luxe', description: 'Brocard de luxe.' },
+            { id: 11, name: 'Caftan Traditionnel 2', price: 185, category: 'caftan', image: 'https://via.placeholder.com/300x300?text=Caftan+Traditionnel+2', description: 'Caftan authentique marocain.' },
+            { id: 12, name: 'Caftan Moderne 2', price: 165, category: 'caftan', image: 'https://via.placeholder.com/300x300?text=Caftan+Moderne+2', description: 'Caftan fusion moderne.' },
+            { id: 13, name: 'Caftan Festif 2', price: 105, category: 'caftan', image: 'https://via.placeholder.com/300x300?text=Caftan+Festif+2', description: 'Caftan parfait pour les occasions spéciales.' },
+            { id: 14, name: 'Caftan Soirée 2', price: 100, category: 'caftan', image: 'https://via.placeholder.com/300x300?text=Caftan+Soirée+2', description: 'Caftan élégant pour soirées.' },
+            { id: 15, name: 'Caftan Traditionnel 3', price: 190, category: 'caftan', image: 'https://via.placeholder.com/300x300?text=Caftan+Traditionnel+3', description: 'Caftan authentique marocain.' },
+            { id: 16, name: 'Caftan Moderne 3', price: 170, category: 'caftan', image: 'https://via.placeholder.com/300x300?text=Caftan+Moderne+3', description: 'Caftan fusion moderne.' },
+            { id: 17, name: 'Caftan Festif 3', price: 110, category: 'caftan', image: 'https://via.placeholder.com/300x300?text=Caftan+Festif+3', description: 'Caftan parfait pour les occasions spéciales.' },
+            { id: 18, name: 'Caftan Soirée 3', price: 100, category: 'caftan', image: 'https://via.placeholder.com/300x300?text=Caftan+Soirée+3', description: 'Caftan élégant pour soirées.' },
+            { id: 19, name: 'Caftan Traditionnel 4', price: 195, category: 'caftan', image: 'https://via.placeholder.com/300x300?text=Caftan+Traditionnel+4', description: 'Caftan authentique marocain.' },
+            { id: 20, name: 'Caftan Moderne 4', price: 175, category: 'caftan', image: 'https://via.placeholder.com/300x300?text=Caftan+Moderne+4', description: 'Caftan fusion moderne.' },
+            { id: 21, name: 'Caftan Festif 4', price: 115, category: 'caftan', image: 'https://via.placeholder.com/300x300?text=Caftan+Festif+4', description: 'Caftan parfait pour les occasions spéciales.' },
+            { id: 22, name: 'Caftan Soirée 4', price: 80, category: 'caftan', image: 'https://via.placeholder.com/300x300?text=Caftan+Soirée+4', description: 'Caftan élégant pour soirées.' },
+            { id: 23, name: 'Caftan Traditionnel 5', price: 100, category: 'caftan', image: 'https://via.placeholder.com/300x300?text=Caftan+Traditionnel+5', description: 'Caftan authentique marocain.' },
+            { id: 24, name: 'Caftan Moderne 5', price: 180, category: 'caftan', image: 'https://via.placeholder.com/300x300?text=Caftan+Moderne+5', description: 'Caftan fusion moderne.' },
+            { id: 25, name: 'Caftan Festif 5', price: 120, category: 'caftan', image: 'https://via.placeholder.com/300x300?text=Caftan+Festif+5', description: 'Caftan parfait pour les occasions spéciales.' },
+            { id: 26, name: 'Caftan Soirée 5', price: 110, category: 'caftan', image: 'https://via.placeholder.com/300x300?text=Caftan+Soirée+5', description: 'Caftan élégant pour soirées.' }
+        ];
+
+        function displayProducts(category = 'all', subTypes = []) {
+            const productList = document.getElementById('product-list');
+            productList.innerHTML = '';
+            let filteredProducts = category === 'all' ? products : products.filter(p => p.category === category);
+            if (subTypes.length > 0 && (category === 'caftan' || category === 'brocard')) {
+                filteredProducts = filteredProducts.filter(p => subTypes.some(type => p.name.toLowerCase().includes(type.toLowerCase())));
+            }
+            filteredProducts.forEach(product => {
+                const productDiv = document.createElement('div');
+                productDiv.className = 'product';
+                productDiv.innerHTML = `
+                    <img src="${product.image}" alt="${product.name}">
+                    <h3>${product.name}</h3>
+                    <p>Prix: ${product.price}€</p>
+                    <a href="product.html?id=${product.id}" class="details-btn">Voir Détails</a>
+                    <button class="add-to-cart" data-product="${product.name}" data-price="${product.price}"><i class="fas fa-cart-plus"></i> Ajouter au panier</button>
+                `;
+                productList.appendChild(productDiv);
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const category = urlParams.get('category') || 'all';
+            if (category === 'caftan') {
+                document.getElementById('filters').style.display = 'block';
+                document.getElementById('filters-bottom').style.display = 'block';
+                document.getElementById('filters-bottom-2').style.display = 'block';
+                document.getElementById('filters-bottom-3').style.display = 'block';
+                document.getElementById('individual-caftans').style.display = 'block';
+            }
+            displayProducts(category);
+
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    displayProducts(btn.dataset.category);
+                });
+            });
+
+            document.querySelectorAll('.caftan-filter').forEach(checkbox => {
+                checkbox.addEventListener('change', () => {
+                    const checkedTypes = Array.from(document.querySelectorAll('.caftan-filter:checked')).map(cb => cb.value);
+                    displayProducts('caftan', checkedTypes);
+                });
+            });
+
+            // Handle bottom filter sections
+            document.querySelectorAll('.caftan-filter-bottom').forEach(checkbox => {
+                checkbox.addEventListener('change', () => {
+                    const checkedTypes = Array.from(document.querySelectorAll('.caftan-filter-bottom:checked')).map(cb => cb.value);
+                    displayProducts('caftan', checkedTypes);
+                });
+            });
+
+            document.querySelectorAll('.caftan-filter-bottom-2').forEach(checkbox => {
+                checkbox.addEventListener('change', () => {
+                    const checkedTypes = Array.from(document.querySelectorAll('.caftan-filter-bottom-2:checked')).map(cb => cb.value);
+                    displayProducts('caftan', checkedTypes);
+                });
+            });
+
+            document.querySelectorAll('.caftan-filter-bottom-3').forEach(checkbox => {
+                checkbox.addEventListener('change', () => {
+                    const checkedTypes = Array.from(document.querySelectorAll('.caftan-filter-bottom-3:checked')).map(cb => cb.value);
+                    displayProducts('caftan', checkedTypes);
+                });
+            });
+
+            document.querySelectorAll('.caftan-filter-bottom-4').forEach(checkbox => {
+                checkbox.addEventListener('change', () => {
+                    const checkedTypes = Array.from(document.querySelectorAll('.caftan-filter-bottom-4:checked')).map(cb => cb.value);
+                    displayProducts('caftan', checkedTypes);
+                });
+            });
+
+            document.querySelectorAll('.caftan-filter-bottom-5').forEach(checkbox => {
+                checkbox.addEventListener('change', () => {
+                    const checkedTypes = Array.from(document.querySelectorAll('.caftan-filter-bottom-5:checked')).map(cb => cb.value);
+                    displayProducts('caftan', checkedTypes);
+                });
+            });
+
+            // Handle add to cart buttons for bottom sections
+            document.getElementById('add-selected-caftans-bottom').addEventListener('click', () => {
+                const checkedTypes = Array.from(document.querySelectorAll('.caftan-filter-bottom:checked')).map(cb => cb.value);
+                addSelectedCaftansToCart(checkedTypes);
+            });
+
+            document.getElementById('add-selected-caftans-bottom-2').addEventListener('click', () => {
+                const checkedTypes = Array.from(document.querySelectorAll('.caftan-filter-bottom-2:checked')).map(cb => cb.value);
+                addSelectedCaftansToCart(checkedTypes);
+            });
+
+            document.getElementById('add-selected-caftans-bottom-3').addEventListener('click', () => {
+                const checkedTypes = Array.from(document.querySelectorAll('.caftan-filter-bottom-3:checked')).map(cb => cb.value);
+                addSelectedCaftansToCart(checkedTypes);
+            });
+
+            document.getElementById('add-selected-caftans-bottom-4').addEventListener('click', () => {
+                const checkedTypes = Array.from(document.querySelectorAll('.caftan-filter-bottom-4:checked')).map(cb => cb.value);
+                addSelectedCaftansToCart(checkedTypes);
+            });
+
+            document.getElementById('add-selected-caftans-bottom-5').addEventListener('click', () => {
+                const checkedTypes = Array.from(document.querySelectorAll('.caftan-filter-bottom-5:checked')).map(cb => cb.value);
+                addSelectedCaftansToCart(checkedTypes);
+            });
+
+            // Handle individual caftans
+            document.getElementById('add-selected-individual-caftans').addEventListener('click', () => {
+                const checkedIds = Array.from(document.querySelectorAll('.individual-caftan:checked')).map(cb => cb.value);
+                addSelectedIndividualCaftansToCart(checkedIds);
+            });
+
+            // Handle brocard filters
+            document.querySelectorAll('.brocard-filter').forEach(checkbox => {
+                checkbox.addEventListener('change', () => {
+                    const checkedTypes = Array.from(document.querySelectorAll('.brocard-filter:checked')).map(cb => cb.value);
+                    displayProducts('brocard', checkedTypes);
+                });
+            });
+
+            document.getElementById('add-selected-brocards').addEventListener('click', () => {
+                const checkedTypes = Array.from(document.querySelectorAll('.brocard-filter:checked')).map(cb => cb.value);
+                addSelectedBrocardsToCart(checkedTypes);
+            });
+
+            // Handle individual brocards
+            document.getElementById('add-selected-individual-brocards').addEventListener('click', () => {
+                const checkedIds = Array.from(document.querySelectorAll('.individual-brocard:checked')).map(cb => cb.value);
+                addSelectedIndividualBrocardsToCart(checkedIds);
+            });
+        });
+
+        function addSelectedCaftansToCart(selectedTypes) {
+            if (selectedTypes.length === 0) {
+                alert('Veuillez sélectionner au moins un type de caftan.');
+                return;
+            }
+            const caftanProducts = products.filter(p => p.category === 'caftan' && selectedTypes.some(type => p.name.toLowerCase().includes(type.toLowerCase())));
+            caftanProducts.forEach(product => {
+                addToCart(product.name, product.price);
+            });
+            alert(`${caftanProducts.length} caftan(s) ajouté(s) au panier!`);
+        }
+
+        function addSelectedIndividualCaftansToCart(checkedIds) {
+            if (checkedIds.length === 0) {
+                alert('Veuillez sélectionner au moins un caftan individuel.');
+                return;
+            }
+            const selectedProducts = products.filter(p => checkedIds.includes(p.id.toString()));
+            selectedProducts.forEach(product => {
+                addToCart(product.name, product.price);
+            });
+            alert(`${selectedProducts.length} caftan(s) individuel(s) ajouté(s) au panier!`);
+        }
+
+        function addSelectedBrocardsToCart(selectedTypes) {
+            if (selectedTypes.length === 0) {
+                alert('Veuillez sélectionner au moins un type de brocard.');
+                return;
+            }
+            const brocardProducts = products.filter(p => p.category === 'brocard' && selectedTypes.some(type => p.name.toLowerCase().includes(type.toLowerCase())));
+            brocardProducts.forEach(product => {
+                addToCart(product.name, product.price);
+            });
+            alert(`${brocardProducts.length} brocard(s) ajouté(s) au panier!`);
+        }
+
+        function addSelectedIndividualBrocardsToCart(checkedIds) {
+            if (checkedIds.length === 0) {
+                alert('Veuillez sélectionner au moins un brocard individuel.');
+                return;
+            }
+            const selectedProducts = products.filter(p => checkedIds.includes(p.id.toString()));
+            selectedProducts.forEach(product => {
+                addToCart(product.name, product.price);
+            });
+            alert(`${selectedProducts.length} brocard(s) individuel(s) ajouté(s) au panier!`);
+        }
+    </script>
+</body>
+</html>
